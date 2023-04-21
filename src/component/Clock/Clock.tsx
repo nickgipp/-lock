@@ -1,30 +1,34 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTimer } from '../../hooks/useTimer';
 import './Clock.css';
 import { getTimeIp } from '../../api';
 
 export const Clock = () => {
     const [tick, setTick] = useTimer(0)
-    const [error, setError] = useState(false)
+    const [error, setError] = useState(true)
     const [timeZone, setTimeZone] = useState('')
-    useEffect(() => {
-        const getTime = async () => {
-            try {
-                const res = await getTimeIp()
-                const resJson = await res.json()
-                setTick(resJson.unixtime * 1000)
-                setTimeZone(resJson.timezone)
-            } catch (error) {
-                console.log(error)
-                setError(true)
-            }
 
+    const getTime = useCallback(async () => {
+        try {
+            const res = await getTimeIp()
+            const resJson = await res.json()
+            setTick(resJson.unixtime * 1000)
+            setTimeZone(resJson.timezone)
+        } catch (error) {
+            console.log(error)
+            setError(true)
         }
-        getTime()
+
     }, [setTick])
 
+    useEffect(() => {
+        getTime()
+    }, [getTime])
+
     if (error) {
-        return <div>Ошбика при получении времени. Попробуйте перезагрузить страницу</div>
+        return <div>Ошибка при получении времени. Попробуйте перезагрузить страницу <br />
+            <button onClick={() => getTime()}>Получить текущее время</button>
+        </div>
     }
 
     return (
