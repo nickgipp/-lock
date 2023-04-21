@@ -5,7 +5,7 @@ import { getTimeIp } from '../../api';
 
 export const Clock = () => {
     const [tick, setTick] = useTimer(0)
-    const [error, setError] = useState(true)
+    const [error, setError] = useState(false)
     const [timeZone, setTimeZone] = useState('')
 
     const getTime = useCallback(async () => {
