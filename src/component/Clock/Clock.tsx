@@ -24,7 +24,7 @@ export const Clock = () => {
     }, [setTick])
 
     if (error) {
-        return <div>Ошбика при получении времени</div>
+        return <div>Ошбика при получении времени. Попробуйте перезагрузить страницу</div>
     }
 
     return (
