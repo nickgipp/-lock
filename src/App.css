@@ -1,0 +1,21 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.semicircle {
+  width: 200px;
+  height: 100px;
+  border: 6px solid rgba(0, 0, 0, 0.5);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  background: aliceblue;
+}
